@@ -9,4 +9,14 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get()
+  getBye(): string {
+    return this.appService.getBye();
+  }
+
+  @Get()
+  fibo(): number {
+    return this.appService.calculateFibonacci(5);
+  }
 }
