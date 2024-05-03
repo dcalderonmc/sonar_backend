@@ -20,7 +20,7 @@ export class UsersRepository {
 
   findUser(email: string): Promise<User> {
     let user = dbUsers.find((u) => u.email === email);
-    if (!user) return Promise.reject('Error description');
+    if (!user) return Promise.reject(new Error('Error description'));
     return Promise.resolve(user);
   }
 }

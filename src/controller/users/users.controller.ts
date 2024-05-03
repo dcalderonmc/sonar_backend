@@ -14,4 +14,19 @@ export class UsersController {
   getUser(@Param('email') email: string) {
     return this.userService.findUser(email);
   }
+
+  @Get('check/:email')
+  checkUser(@Param('email') email: string) {
+    return this.userService.isEmailUsed(email);
+  }
+
+  @Get('check/:email')
+  isEmailUsed(@Param('email') email: string) {
+    return this.userService.isEmailUsed(email);
+  }
+
+  @Get('login/:email')
+  login(@Param('email') email: string) {
+    return this.userService.login(email);
+  }
 }
