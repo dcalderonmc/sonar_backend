@@ -11,9 +11,9 @@ export class UsersService {
     return this.userRepository.getUsers();
   }
 
-  findUser(email: string): Promise<User> {
+  async findUser(email: string): Promise<User> {
     try {
-      return this.userRepository.findUser(email);
+      return await this.userRepository.findUser(email);
     } catch (error) {
       this.logger.error('Error happened finding for user', error.stack);
     }
