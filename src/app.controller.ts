@@ -9,4 +9,14 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('/health')
+  getHealth(): boolean {
+    return this.appService.getHealth();
+  }
+
+  @Get('/datetime')
+  getDatetime(): Date {
+    return this.appService.getDatetime();
+  }
 }

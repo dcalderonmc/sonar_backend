@@ -5,4 +5,12 @@ export class AppService {
   getHello(): string {
     return 'Hello World!';
   }
+
+  getHealth(): boolean {
+    return true;
+  }
+
+  getDatetime(): Date {
+    return new Date();
+  }
 }
