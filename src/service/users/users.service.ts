@@ -12,21 +12,17 @@ export class UsersService {
     return this.userRepository.getUsers();
   }
 
-  async getPassword(email: string): Promise<string> {
-    const user = await this.findUser(email);
-    return user.password || '';
-  }
-
-  findUser(email: string): Promise<User> {
+  async findUser(email: string): Promise<User> {
     try {
-      return this.userRepository.findUser(email);
+      return await this.userRepository.findUser(email);
     } catch (error) {
       this.logger.error('Error happened finding for user', error.stack);
+      return undefined;
     }
   }
 
-  isEmailUsed(email: string): boolean {
-    const UserTemp = this.findUser(email);
+  async isEmailUsed(email: string): Promise<boolean> {
+    const UserTemp = await this.findUser(email);
     if (UserTemp) return true;
     return false;
   }
@@ -35,59 +31,6 @@ export class UsersService {
     const payload = {
       user: email,
     };
-    return sign(payload, process.env.JWT_KEY, { algorithm: 'none' });
-  }
-
-  processUserData(users: User[]): User[] {
-    const processedUsers: User[] = [];
-
-    for (const user of users) {
-      const processedUser: Partial<User> = {};
-
-      // Perform basic validation
-      if (!user.name || !user.age) {
-        continue;
-      }
-
-      // Process user name
-      processedUser.name =
-        user.name.charAt(0).toUpperCase() + user.name.slice(1);
-
-      // Process user age
-      processedUser.isAdult = user.age >= 18;
-
-      // Process user email
-      if (user.email) {
-        processedUser.hasValidEmail = user.email.includes('@');
-      }
-
-      // Process user preferences
-      processedUser.preferences = [];
-      if (user.preferences && Array.isArray(user.preferences)) {
-        for (const pref of user.preferences) {
-          if (typeof pref === 'string' && pref.trim().length > 0) {
-            processedUser.preferences.push(pref.trim().toLowerCase());
-          }
-        }
-      }
-
-      // Process user transactions
-      processedUser.transactions = [];
-      if (user.transactions && Array.isArray(user.transactions)) {
-        for (const trans of user.transactions) {
-          if (
-            typeof trans === 'object' &&
-            'amount' in trans &&
-            'date' in trans
-          ) {
-            processedUser.transactions.push(trans);
-          }
-        }
-      }
-
-      processedUsers.push(processedUser as User);
-    }
-
-    return processedUsers;
+    return sign(payload, process.env.JWT_KEY, { algorithm: 'HS256' });
   }
 }
