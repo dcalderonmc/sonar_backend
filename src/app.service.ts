@@ -13,4 +13,8 @@ export class AppService {
   getDatetime(): Date {
     return new Date();
   }
+
+  getRandomNum(): number {
+    return Math.random();
+  }
 }
