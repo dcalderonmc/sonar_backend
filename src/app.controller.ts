@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,13 +10,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get()
+  @Get('/bye')
   getBye(): string {
     return this.appService.getBye();
   }
 
-  @Get()
-  fibo(): number {
-    return this.appService.calculateFibonacci(5);
+  @Get('/fibonacci/:number')
+  fibo(@Param('number') n: number): number {
+    return this.appService.calculateFibonacci(n);
   }
 }
