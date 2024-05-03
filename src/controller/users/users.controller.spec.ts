@@ -18,4 +18,20 @@ describe('UsersController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  it('should return the users', async () => {
+    const users = await controller.getUsers();
+    expect(users).toBeDefined();
+    expect(users.length).toBe(2);
+  });
+
+  it('should return the user', async () => {
+    const users = await controller.getUser('dcalderon@mangochango.com');
+    expect(users).toBeDefined();
+  });
+
+  it('should return falsy', async () => {
+    const users = await controller.getUser('willy@mangochango.com');
+    expect(users).toBeFalsy();
+  });
 });
