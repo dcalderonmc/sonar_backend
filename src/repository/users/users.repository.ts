@@ -5,12 +5,10 @@ const dbUsers: User[] = [
   {
     name: 'Diego Calderón',
     email: 'dcalderon@mangochango.com',
-    password: 'secret',
   },
   {
     name: 'Miguel de Leon',
     email: 'mleon@mangochango.com',
-    password: 'secret',
   },
 ];
 
