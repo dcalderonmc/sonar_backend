@@ -5,7 +5,10 @@ on:
     tags:
       - staging
       - 'staging/*'
-
+  create:
+    tags:
+      - '*'
+      
 jobs:
   create-tag:
     name: Create Tag
