@@ -20,7 +20,7 @@ jobs:
               ref: 'tags/staging'
             })
             
-            const tagResponse = await github.res.git.createTag({
+            const tagResponse = await github.rest.git.createTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag: 'staging',
