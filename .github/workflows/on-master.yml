@@ -17,7 +17,7 @@ jobs:
             github.rest.git.deleteRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: 'refs/tags/staging'
+              ref: 'staging'
             })
             github.rest.git.createRef({
               owner: context.repo.owner,
