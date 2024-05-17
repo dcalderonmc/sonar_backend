@@ -19,11 +19,22 @@ jobs:
               repo: context.repo.repo,
               ref: 'tags/staging'
             })
+            
+            const tagResponse = await github.res.git.createTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: 'staging',
+              sha: context.sha,
+              message: 'Staging',
+              type: 'commit'
+            })
+            const tagSha = tagResponse.data.sha
+
             github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: 'refs/tags/staging',
-              sha: context.sha
+              sha: tagSha
             })
   sonarcloud:
     name: SonarCloud
