@@ -10,6 +10,8 @@ jobs:
   create-tag:
     name: Create Tag
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       tag_name: ${{ steps.tag_name.outputs.tag_name }}
     steps:
